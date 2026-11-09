@@ -870,46 +870,7 @@ void app_main() {
     }
     
     
-    // ESP_ERROR_CHECK(battery_init());
     
-    // while(1){
-    //     uint32_t mv;
-    //     float percent;
-    //     if(battery_read_mv(&mv) ==ESP_OK && battery_read_percent(&percent) ==ESP_OK){
-            
-    //         printf(" %lu mV %.1f%% \n",(unsigned long)mv,percent);
-    //     }
-
-    //     if(percent >=0 && percent <= 25){
-    //        led_strip_set_pixel(3,100,0,0);
-    //        led_strip_set_pixel(1,0,0,0);
-    //        led_strip_set_pixel(2,0,0,0);
-    //        led_strip_set_pixel(0,0,0,0);
-    //     }
-    //     if(percent>=26 && percent <=50){
-    //         led_strip_set_pixel(2,255,210,0);
-    //         led_strip_set_pixel(3,255,210,0);
-    //         led_strip_set_pixel(1,0,0,0);
-    //         led_strip_set_pixel(0,0,0,0); 
-    //     }
-    //     if(percent>=51 && percent <=75){
-    //         led_strip_set_pixel(3,0,100,0);
-    //         led_strip_set_pixel(1,0,100,0);
-    //         led_strip_set_pixel(2,0,100,0); 
-    //         led_strip_set_pixel(0,0,0,0);
-    //     }
-    //     if(percent>=76 && percent <=100){
-    //         led_strip_set_pixel(0,0,100,0);
-    //         led_strip_set_pixel(1,0,100,0);
-    //         led_strip_set_pixel(2,0,100,0);
-    //         led_strip_set_pixel(3,0,100,0);
-    //     }
-    //     led_strip_refresh();
-    //     vTaskDelay(pdMS_TO_TICKS(1000));
-        
-    // }
-    
-
     
     ESP_LOGI(TAG, "app_main finished initial setup");
    
