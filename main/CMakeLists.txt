@@ -13,6 +13,9 @@ set(SRCS
         db_parameters.c
         db_led_indicator.c
         db_timers.c
+        db_led_strip.c
+        db_battery_indicator.c
+        db_battery_leds.c
 )
 
 if(CONFIG_BT_ENABLED)
@@ -20,7 +23,8 @@ if(CONFIG_BT_ENABLED)
 endif()
 
 idf_component_register(SRCS ${SRCS}
-        INCLUDE_DIRS ".")
+        INCLUDE_DIRS "."
+        )
 
 
 if(CONFIG_WEB_DEPLOY_SF)

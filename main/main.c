@@ -51,9 +51,18 @@
 
 #include <db_timers.h>
 
+
+#include"db_led_strip.h"
+#include"db_battery_indicator.h"
+#include"freertos/FreeRTOS.h"
+
+
 #ifdef CONFIG_BT_ENABLED
 
 #include "db_ble.h"
+
+
+
 
 #endif
 
@@ -73,6 +82,8 @@
 #else
 #define DB_RESET_PIN GPIO_NUM_0
 #endif
+
+
 
 static const char *TAG = "DB_ESP32";
 
@@ -784,6 +795,7 @@ void db_configure_antenna() {
 /**
  * Main entry point.
  */
+
 void app_main() {
     db_param_init_parameters();
     udp_conn_list = udp_client_list_create(); // http server functions and db_read_settings_nvs expect the list to exist
@@ -841,12 +853,13 @@ void app_main() {
         netbiosns_set_name("dronebridge");
     }
     ESP_ERROR_CHECK(init_fs());
+    led_strip_init();
     db_start_control_module();
 
     db_timer_start_mavlink_heartbeat();
     db_timer_start_mavlink_radio_status();
     db_timer_start_status_led();
-
+    db_timer_start_battery_timer();
     if (DB_PARAM_RADIO_MODE != DB_WIFI_MODE_ESPNOW_AIR && DB_PARAM_RADIO_MODE != DB_WIFI_MODE_ESPNOW_GND &&
         DB_PARAM_RADIO_MODE != DB_WIFI_MODE_AP_LR) {
         // no need to start these services - won`t be available anyway - safe the resources
@@ -855,5 +868,50 @@ void app_main() {
         // Disable legacy support for DroneBridge communication module - no use case for DroneBridge for ESP32
         // communication_module();
     }
+    
+    
+    // ESP_ERROR_CHECK(battery_init());
+    
+    // while(1){
+    //     uint32_t mv;
+    //     float percent;
+    //     if(battery_read_mv(&mv) ==ESP_OK && battery_read_percent(&percent) ==ESP_OK){
+            
+    //         printf(" %lu mV %.1f%% \n",(unsigned long)mv,percent);
+    //     }
+
+    //     if(percent >=0 && percent <= 25){
+    //        led_strip_set_pixel(3,100,0,0);
+    //        led_strip_set_pixel(1,0,0,0);
+    //        led_strip_set_pixel(2,0,0,0);
+    //        led_strip_set_pixel(0,0,0,0);
+    //     }
+    //     if(percent>=26 && percent <=50){
+    //         led_strip_set_pixel(2,255,210,0);
+    //         led_strip_set_pixel(3,255,210,0);
+    //         led_strip_set_pixel(1,0,0,0);
+    //         led_strip_set_pixel(0,0,0,0); 
+    //     }
+    //     if(percent>=51 && percent <=75){
+    //         led_strip_set_pixel(3,0,100,0);
+    //         led_strip_set_pixel(1,0,100,0);
+    //         led_strip_set_pixel(2,0,100,0); 
+    //         led_strip_set_pixel(0,0,0,0);
+    //     }
+    //     if(percent>=76 && percent <=100){
+    //         led_strip_set_pixel(0,0,100,0);
+    //         led_strip_set_pixel(1,0,100,0);
+    //         led_strip_set_pixel(2,0,100,0);
+    //         led_strip_set_pixel(3,0,100,0);
+    //     }
+    //     led_strip_refresh();
+    //     vTaskDelay(pdMS_TO_TICKS(1000));
+        
+    // }
+    
+
+    
     ESP_LOGI(TAG, "app_main finished initial setup");
+   
+    
 }

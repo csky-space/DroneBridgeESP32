@@ -24,7 +24,9 @@
 #include "globals.h"
 #include <esp_wifi.h>
 #include "db_led_indicator.h"
-
+#include"db_battery_leds.h"
+#include"db_battery_indicator.h"
+#include"db_led_strip.h"
 #define TAG "DB_TIMERS"
 
 /**
@@ -204,4 +206,34 @@ void db_timer_start_status_led() {
         ESP_LOGI(TAG, "Starting status LED timer.");
         xTimerStart(xStatusLedTimerHandle, 0);
     }
+}
+
+static void db_timer_battery_callback(TimerHandle_t pxTimer){
+	battery_update();
+	battery_leds_update();
+}
+
+void db_timer_start_battery_timer(){
+	static TimerHandle_t xBatteryTimer;
+	if(battery_init() != ESP_OK){
+		ESP_LOGE(TAG, "Failed to init battery monitor. Timer not started.");
+		return;
+	}
+    xBatteryTimer = xTimerCreate(
+          "Battery_timer",
+          pdMS_TO_TICKS(DB_TIMER_BATTERY_PERIOD_MS),
+          pdTRUE,
+          (void *) 0,
+          db_timer_battery_callback
+  );
+
+	if(xBatteryTimer == NULL){
+		ESP_LOGE(TAG, "Failed to create battery timer.");
+		
+	}
+	if(xBatteryTimer != NULL){
+		ESP_LOGI(TAG, "Starting battery timer.");
+		xTimerStart(xBatteryTimer, 0);
+	}
+
 }
