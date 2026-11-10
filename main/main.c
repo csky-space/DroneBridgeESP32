@@ -853,8 +853,10 @@ void app_main() {
         netbiosns_set_name("dronebridge");
     }
     ESP_ERROR_CHECK(init_fs());
+    #if CONFIG_IDF_TARGET_ESP32C3
     led_strip_init();
     db_start_control_module();
+    #endif
 
     db_timer_start_battery_timer();
     db_timer_start_mavlink_heartbeat();

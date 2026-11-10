@@ -4,7 +4,7 @@
 #include "esp_adc/adc_oneshot.h"
 #include "esp_adc/adc_cali.h"
 #include "esp_adc/adc_cali_scheme.h"
-
+#if CONFIG_IDF_TARGET_ESP32C3
 #define BAT_ADC_UNIT      ADC_UNIT_1
 #define BAT_ADC_CHANNEL   ADC_CHANNEL_1        /* GPIO1 */
 #define BAT_ADC_ATTEN     ADC_ATTEN_DB_12      /* input до ~2.45 V  on the pin*/
@@ -247,3 +247,4 @@ float battery_get_percent(void)
 {
     return battery_mv_to_percent(s_last_mv, s_cells);
 }
+#endif

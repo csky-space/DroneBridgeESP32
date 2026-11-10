@@ -1,5 +1,5 @@
 #include "db_battery_leds.h"
-
+#if CONFIG_IDF_TARGET_ESP32C3
 #include <stdbool.h>
 #include <stdint.h>
 #include "db_battery_indicator.h"
@@ -60,3 +60,5 @@ void battery_leds_update(void)
     }
     led_strip_refresh();
 }
+
+#endif

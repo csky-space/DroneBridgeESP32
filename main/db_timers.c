@@ -24,8 +24,10 @@
 #include "globals.h"
 #include <esp_wifi.h>
 #include "db_led_indicator.h"
+#if CONFIG_IDF_TARGET_ESP32C3
 #include"db_battery_leds.h"
 #include"db_battery_indicator.h"
+#endif
 #include"db_led_strip.h"
 #define TAG "DB_TIMERS"
 
@@ -212,7 +214,7 @@ static void db_timer_battery_callback(TimerHandle_t pxTimer){
 	battery_update();
 	battery_leds_update();
 }
-
+#if CONFIG_IDF_TARGET_ESP32C3
 void db_timer_start_battery_timer(){
 	static TimerHandle_t xBatteryTimer;
 	if(battery_init() != ESP_OK){
@@ -241,3 +243,4 @@ void db_timer_start_battery_timer(){
 	}
 
 }
+#endif
