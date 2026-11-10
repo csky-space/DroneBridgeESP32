@@ -239,6 +239,7 @@ void battery_update(void)
 
 uint32_t battery_get_mv(void)
 {
+    
     return s_last_mv;
 }
 
