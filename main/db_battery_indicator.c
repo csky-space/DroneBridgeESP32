@@ -234,6 +234,7 @@ void battery_update(void)
         s_filtered_mv += BAT_FILTER_ALPHA * ((float)mv - s_filtered_mv);
     }
     s_last_mv = (uint32_t)s_filtered_mv;
+    
 }
 
 uint32_t battery_get_mv(void)

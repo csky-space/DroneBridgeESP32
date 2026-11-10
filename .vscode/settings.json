@@ -13,6 +13,6 @@
       "--query-driver=**",
       "--compile-commands-dir=c:\\VScode\\drone-bridge\\build"
     ],
-    "idf.port": "COM5",
-    "idf.monitorPort": "COM5"
+    "idf.port": "COM7",
+    "idf.monitorPort": "COM7"
 }

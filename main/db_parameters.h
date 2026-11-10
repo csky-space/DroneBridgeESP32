@@ -44,15 +44,15 @@ typedef bool (*db_param_output_callback_t)(const uint8_t *line, size_t line_leng
 #define DB_MATURITY_VERSION "stable"
 #define DB_TYPE_VERSION 255 // FIRMWARE_VERSION_TYPE_OFFICIAL -> https://mavlink.io/en/messages/common.html#FIRMWARE_VERSION_TYPE
 
-#define DB_PARAM_TOTAL_NUM          27  // total number of db parameters
-#define DB_PARAM_MAV_CNT            18  // Number of MAVLink parameters returned by ESP32 in the PARAM message. Needed by GCS.
+#define DB_PARAM_TOTAL_NUM          28  // total number of db parameters
+#define DB_PARAM_MAV_CNT            19  // Number of MAVLink parameters returned by ESP32 in the PARAM message. Needed by GCS.
 
 #define DB_PARAM_NAME_MAXLEN        16      // max len of a parameter/key stored in the ESP32 NVM
 #define DB_PARAM_MAX_MAV_PARAM_NAME_LEN 16  // max len of the field used to store the mav param name (max len 16 by def.)
 #define DB_PARAM_VALUE_MAXLEN       64      // max len of a value stored for a key in the ESP32 NVM (string len)
 #define DB_SERIAL_PACK_SIZE_MAX     1023U   // maximum configured serial packet size; keep below UART_BUF_SIZE
 #define MAX_LTM_FRAMES_IN_BUFFER    5
-
+#define DB_DEFAULT_CELLS_COUNT 0
 
 #ifdef CONFIG_DB_OFFICIAL_BOARD_1_X
 #define DB_DEFAULT_UART_TX_PIN GPIO_NUM_5
@@ -105,6 +105,7 @@ typedef bool (*db_param_output_callback_t)(const uint8_t *line, size_t line_leng
 #define DB_PARAM_SERIAL_RTS_THRESH db_param_gpio_rts_thresh.value.db_param_u8.value
 #define DB_PARAM_EN_EXT_ANT db_param_radio_ant_ext.value.db_param_u8.value
 #define DB_PARAM_ESPNOW_AIR2AIR db_param_espnow_air2air.value.db_param_u8.value
+#define DB_PARAM_CELLS_COUNT_VALUE db_param_cells_count.value.db_param_u8.value
 
 enum E_DB_WIFI_MODE {
   DB_WIFI_MODE_AP         = 1, // Wi-Fi access point mode with 802.11b mode enabled
@@ -203,6 +204,7 @@ extern db_parameter_t db_param_dis_radio_armed;
 extern db_parameter_t db_param_udp_client_port;
 extern db_parameter_t db_param_rssi_dbm;
 extern db_parameter_t db_param_espnow_air2air;
+extern db_parameter_t db_param_cells_count;
 
 void db_param_init_parameters();
 void db_param_set_to_default(db_parameter_t *db_parameter);

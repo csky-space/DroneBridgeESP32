@@ -248,6 +248,16 @@
                         <option value="1200">1200</option>
                     </select>
                 </div>
+            <div class="cells count" id="cells_div">
+                    <label for="cells">Battery cells count</label>
+                    <select name="cells" id="cells" form="settings_form">
+                        <option value="6">6</option>
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
             </div>
             <div id="msp_ltm_div" class="row">
                 <div class="twelve columns">
@@ -339,6 +349,7 @@
     setTimeout(change_msp_ltm_visibility, 500)
     setTimeout(change_ap_ip_visibility, 500)
     setTimeout(change_uart_visibility, 500)
+    setTimeout(change_cells_visibility,100);
 </script>
 </body>
 </html>

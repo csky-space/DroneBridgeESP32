@@ -435,6 +435,26 @@ db_parameter_t db_param_espnow_air2air = {
                 }
         }
 };
+/*
+    Set cells count
+*/
+db_parameter_t db_param_cells_count = {
+        .db_name = "cells",
+        .type = UINT8,
+        .mav_t = {
+                .param_name = "CELLS_COUNT",
+                .param_index = 18,
+                .param_type = MAV_PARAM_TYPE_INT8,
+        },
+        .value = {
+                .db_param_u8 = {
+                        .value = DB_DEFAULT_CELLS_COUNT,
+                        .default_value = DB_DEFAULT_CELLS_COUNT,
+                        .min = 2,
+                        .max = 6,
+                }
+        }
+};
 
 /**
  * Array containing all references to the DB parameters assigned with db_param_init_parameters()
@@ -546,7 +566,8 @@ void db_param_init_parameters() {
             &db_param_dis_radio_armed,
             &db_param_udp_client_port,
             &db_param_rssi_dbm,
-            &db_param_espnow_air2air
+            &db_param_espnow_air2air,
+            &db_param_cells_count
     };
     memcpy(db_params, db_params_l, sizeof(db_params_l));
 }

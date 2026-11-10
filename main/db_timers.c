@@ -219,6 +219,10 @@ void db_timer_start_battery_timer(){
 		ESP_LOGE(TAG, "Failed to init battery monitor. Timer not started.");
 		return;
 	}
+    if(battery_set_cell_count(DB_PARAM_CELLS_COUNT_VALUE) != ESP_OK){
+        ESP_LOGE(TAG, "Failed to set battery cells. Timer not started.");
+		return;
+    }
     xBatteryTimer = xTimerCreate(
           "Battery_timer",
           pdMS_TO_TICKS(DB_TIMER_BATTERY_PERIOD_MS),

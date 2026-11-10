@@ -132,7 +132,9 @@ function change_uart_visibility() {
 		baud_div.style.display = "none";
 	}
 }
-
+function change_cells_visibility(){
+	let cells_div = document.getElementById("cells_div");
+}
 function flow_control_check() {
 	let gpio_rts = document.getElementById("gpio_rts");
 	let gpio_cts = document.getElementById("gpio_cts");

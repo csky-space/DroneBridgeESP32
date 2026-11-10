@@ -25,7 +25,7 @@
 #define DB_TIMER_MAVLINK_RADIOSTATUS_MS 1000 // Radio Status every second
 // Periodic LED state evaluation interval (db_status_led_process()).
 #define DB_TIMER_STATUS_LED_MS 1000
-#define DB_TIMER_BATTERY_PERIOD_MS 1000
+#define DB_TIMER_BATTERY_PERIOD_MS 100
 void db_timer_start_wifi_rssi_timer();
 
 void db_timer_start_mavlink_heartbeat();

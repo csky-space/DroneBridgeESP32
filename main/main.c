@@ -856,10 +856,11 @@ void app_main() {
     led_strip_init();
     db_start_control_module();
 
+    db_timer_start_battery_timer();
     db_timer_start_mavlink_heartbeat();
     db_timer_start_mavlink_radio_status();
     db_timer_start_status_led();
-    db_timer_start_battery_timer();
+    
     if (DB_PARAM_RADIO_MODE != DB_WIFI_MODE_ESPNOW_AIR && DB_PARAM_RADIO_MODE != DB_WIFI_MODE_ESPNOW_GND &&
         DB_PARAM_RADIO_MODE != DB_WIFI_MODE_AP_LR) {
         // no need to start these services - won`t be available anyway - safe the resources
